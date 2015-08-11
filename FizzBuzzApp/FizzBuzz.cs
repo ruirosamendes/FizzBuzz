@@ -15,7 +15,9 @@ namespace FizzBuzzApp
             {
                 for (int number = bottomNumber; number <= topNumber; number++)
                 {
-                    if ((number % 15) == 0)
+                    if(number.ToString().Contains("3"))
+                        numberOutput = "lucky";
+                    else if ((number % 15) == 0)
                         numberOutput = "fizzbuzz";
                     else if ((number % 5) == 0)
                         numberOutput = "buzz";
@@ -51,7 +53,7 @@ namespace FizzBuzzApp
         [Test()]
         public void FizzBuzzFromOneToTwenty()
         {
-            string expectedOutput = @"1 2 fizz 4 buzz fizz 7 8 fizz buzz 11 fizz 13 14 fizzbuzz 16 17 fizz 19 buzz";
+            string expectedOutput = @"1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz 16 17 fizz 19 buzz";
             FizzBuzz fizzBuzz = new FizzBuzz();            
             Assert.AreEqual(expectedOutput, fizzBuzz.Output(1, 20));
         }
@@ -73,8 +75,15 @@ namespace FizzBuzzApp
                        Assert.AreEqual (
                          "Huge contiguous range. Please select smaller contiguous range.",
                         fizzBuzz.Output(1, int.MaxValue));
-                });
-            
+                });            
+        }
+
+        [Test()]
+        public void FizzBuzzFromOneToTwentyMustOutputLuckyForNumbersContainingThree()
+        {
+            string expectedOutput = @"1 2 lucky 4 buzz fizz 7 8 fizz buzz 11 fizz lucky 14 fizzbuzz 16 17 fizz 19 buzz";
+            FizzBuzz fizzBuzz = new FizzBuzz();
+            Assert.AreEqual(expectedOutput, fizzBuzz.Output(1, 20));
         }
 
     }
